@@ -146,5 +146,5 @@ pages/
 ├── MyLostFoundPage.ets      ← 何隆
 ├── ClubActivityListPage.ets ← 何隆
 ├── ClubActivityDetailPage.ets ← 何隆
-├── ClubActivityPublishPage.ets ← 何隆
+├── ClubActivityPublishPage.ets ← 组长
 ```
