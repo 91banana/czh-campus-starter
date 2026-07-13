@@ -4,10 +4,10 @@
 
 | 人 | 负责 | 项目 |
 |---|---|---|
-| **曹泽涵（组长）** | 后端 + 首页 + 核心文件 + 兜底 | Campus-Server |
+| **曹泽涵（组长）** | 后端 + 首页 + 核心文件 + 社团活动3页 + 兜底 | Campus-Server |
 | **白雪峰** | 鸿蒙：课表 / 空教室 / 改密码 / 个人中心（5页） | CampusAssistant |
 | **谢易霖** | 鸿蒙：商品 / 收藏 / 浏览 / 投诉 / 发布（6页） | CampusAssistant |
-| **何隆** | 鸿蒙：聊天 / 失物招领 / 社团活动 / 公告（6页） | CampusAssistant |
+| **何隆** | 鸿蒙：聊天 / 失物招领 / 公告（5页） | CampusAssistant |
 | **杨晨** | Web 管理员前端（8页） | web-admin |
 
 ## 🚀 快速开始
@@ -144,7 +144,8 @@ pages/
 ├── LostFoundDetailPage.ets  ← 何隆
 ├── LostFoundPublishPage.ets ← 何隆
 ├── MyLostFoundPage.ets      ← 何隆
-├── ClubActivityListPage.ets ← 何隆
-├── ClubActivityDetailPage.ets ← 何隆
+│
+├── ClubActivityListPage.ets    ← 组长
+├── ClubActivityDetailPage.ets  ← 组长
 ├── ClubActivityPublishPage.ets ← 组长
 ```
