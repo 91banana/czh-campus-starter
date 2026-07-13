@@ -1,0 +1,116 @@
+package com.campus.controller;
+
+import com.campus.common.Result;
+import com.campus.dto.ProductVO;
+import com.campus.service.BrowseHistoryService;
+import com.campus.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.UUID;
+
+@RestController
+@RequestMapping("/api/product")
+public class ProductController {
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private BrowseHistoryService browseHistoryService;
+
+    @Autowired
+    private com.campus.service.ComplaintService complaintService;
+
+    @Value("${file.upload-dir:uploads}")
+    private String uploadDir;
+
+    @GetMapping("/list")
+    public Result<List<ProductVO>> getList(@RequestParam(required = false) Long categoryId) {
+        List<ProductVO> list = productService.getProductList(categoryId);
+        return Result.ok(list);
+    }
+
+    @GetMapping("/search")
+    public Result<List<ProductVO>> search(@RequestParam String keyword) {
+        return Result.ok(productService.searchProducts(keyword));
+    }
+
+    @GetMapping("/search-suggest")
+    public Result<List<String>> searchSuggest(@RequestParam String keyword) {
+        return Result.ok(productService.searchSuggest(keyword));
+    }
+
+    @GetMapping("/{id}")
+    public Result<ProductVO> getDetail(@PathVariable Long id, HttpServletRequest request) {
+        ProductVO vo = productService.getProductDetail(id);
+        try {
+            Long userId = (Long) request.getAttribute("userId");
+            if (userId != null) {
+                browseHistoryService.recordBrowse(userId, id);
+            }
+        } catch (Exception ignored) {}
+        return Result.ok(vo);
+    }
+
+    @PostMapping("/publish")
+    public Result<Void> publish(HttpServletRequest request, @RequestBody ProductVO vo) {
+        Long userId = (Long) request.getAttribute("userId");
+        if (!complaintService.canTrade(userId)) {
+            return Result.error("信用分不足85，无法发布商品");
+        }
+        productService.publishProduct(userId, vo);
+        return Result.ok();
+    }
+
+    @GetMapping("/my-products")
+    public Result<List<ProductVO>> myProducts(HttpServletRequest request) {
+        Long userId = (Long) request.getAttribute("userId");
+        List<ProductVO> list = productService.getMyProducts(userId);
+        return Result.ok(list);
+    }
+
+    @PostMapping("/update-status")
+    public Result<Void> updateStatus(HttpServletRequest request, @RequestParam Long productId, @RequestParam Integer status) {
+        Long userId = (Long) request.getAttribute("userId");
+        productService.updateProductStatus(userId, productId, status);
+        return Result.ok();
+    }
+
+    @PostMapping("/delete")
+    public Result<Void> delete(HttpServletRequest request, @RequestParam Long productId) {
+        Long userId = (Long) request.getAttribute("userId");
+        productService.deleteProduct(userId, productId);
+        return Result.ok();
+    }
+
+    @PostMapping("/upload-image")
+    public Result<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return Result.error("文件为空");
+        }
+        String originalFilename = file.getOriginalFilename();
+        String ext = "";
+        if (originalFilename != null && originalFilename.contains(".")) {
+            ext = originalFilename.substring(originalFilename.lastIndexOf("."));
+        }
+        String filename = UUID.randomUUID().toString().replace("-", "") + ext;
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        try {
+            file.transferTo(new File(dir, filename));
+        } catch (IOException e) {
+            return Result.error("上传失败");
+        }
+        String url = "/uploads/" + filename;
+        return Result.ok(url);
+    }
+}

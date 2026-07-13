@@ -1,0 +1,26 @@
+{
+  "src": [
+    "pages/LoginPage",
+    "pages/RegisterPage",
+    "pages/MainPage",
+    "pages/ConversationListPage",
+    "pages/ChatPage",
+    "pages/ProductDetailPage",
+    "pages/PublishPage",
+    "pages/MyPublishPage",
+    "pages/MyFavoritesPage",
+    "pages/AiChatPage",
+    "pages/EmptyRoomPage",
+    "pages/RoomSchedulePage",
+    "pages/LostFoundListPage",
+    "pages/LostFoundPublishPage",
+    "pages/LostFoundDetailPage",
+    "pages/MyLostFoundPage",
+    "pages/MyHistoryPage",
+    "pages/PasswordChangePage",
+    "pages/ClubActivityListPage",
+    "pages/ClubActivityPublishPage",
+    "pages/ClubActivityDetailPage",
+    "pages/MyComplaintsPage"
+  ]
+}

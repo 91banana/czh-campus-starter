@@ -1,0 +1,14 @@
+.DS_Store
+node_modules/
+target/
+dist/
+*.class
+*.jar
+.hvigor/
+.cache/
+oh_modules/
+uploads/*
+.idea/
+*.iml
+__pycache__/
+local.properties
