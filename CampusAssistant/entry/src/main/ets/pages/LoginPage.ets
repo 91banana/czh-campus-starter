@@ -3,7 +3,7 @@
 struct LoginPage {
   build() {
     Column() {
-      Text('LoginPage')
+      Text('登录 - 待实现')
         .fontSize(20)
     }
     .width('100%')

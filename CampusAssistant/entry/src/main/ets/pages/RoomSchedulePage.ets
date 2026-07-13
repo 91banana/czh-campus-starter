@@ -3,7 +3,7 @@
 struct RoomSchedulePage {
   build() {
     Column() {
-      Text('RoomSchedulePage')
+      Text('教室课表 - 待实现')
         .fontSize(20)
     }
     .width('100%')

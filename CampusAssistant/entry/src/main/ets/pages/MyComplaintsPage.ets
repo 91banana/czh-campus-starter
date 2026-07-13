@@ -3,7 +3,7 @@
 struct MyComplaintsPage {
   build() {
     Column() {
-      Text('MyComplaintsPage')
+      Text('我的投诉 - 待实现')
         .fontSize(20)
     }
     .width('100%')

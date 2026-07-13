@@ -3,7 +3,7 @@
 struct ClubActivityDetailPage {
   build() {
     Column() {
-      Text('ClubActivityDetailPage')
+      Text('活动详情 - 待实现')
         .fontSize(20)
     }
     .width('100%')

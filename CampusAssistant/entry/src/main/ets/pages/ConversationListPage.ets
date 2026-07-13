@@ -3,7 +3,7 @@
 struct ConversationListPage {
   build() {
     Column() {
-      Text('ConversationListPage')
+      Text('会话列表 - 待实现')
         .fontSize(20)
     }
     .width('100%')

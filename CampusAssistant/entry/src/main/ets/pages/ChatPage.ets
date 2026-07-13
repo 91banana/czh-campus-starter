@@ -3,7 +3,7 @@
 struct ChatPage {
   build() {
     Column() {
-      Text('ChatPage')
+      Text('私聊 - 待实现')
         .fontSize(20)
     }
     .width('100%')
