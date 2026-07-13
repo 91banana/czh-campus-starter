@@ -114,3 +114,37 @@ git commit -m "style: 调整了xxx样式"      # 样式调整
 | `02-api-doc.md` | 所有人（特别是杨晨） |
 | `03-structure.md` | 所有人 |
 | `04-api-template.md` | 白雪峰 / 谢易霖 / 何隆 |
+
+---
+
+## 📄 页面归属（鸿蒙端）
+
+```
+pages/
+├── Index.ets                ← 组长写的（别动）
+├── MainPage.ets             ← 组长写的（别动）
+├── AiChatPage.ets           ← 组长写的（别动）
+│
+├── LoginPage.ets            ← 白雪峰
+├── RegisterPage.ets         ← 白雪峰
+├── EmptyRoomPage.ets        ← 白雪峰
+├── RoomSchedulePage.ets     ← 白雪峰
+├── PasswordChangePage.ets   ← 白雪峰
+│
+├── ProductDetailPage.ets    ← 谢易霖
+├── PublishPage.ets          ← 谢易霖
+├── MyPublishPage.ets        ← 谢易霖
+├── MyFavoritesPage.ets      ← 谢易霖
+├── MyHistoryPage.ets        ← 谢易霖
+├── MyComplaintsPage.ets     ← 谢易霖
+│
+├── ChatPage.ets             ← 何隆
+├── ConversationListPage.ets ← 何隆
+├── LostFoundListPage.ets    ← 何隆
+├── LostFoundDetailPage.ets  ← 何隆
+├── LostFoundPublishPage.ets ← 何隆
+├── MyLostFoundPage.ets      ← 何隆
+├── ClubActivityListPage.ets ← 何隆
+├── ClubActivityDetailPage.ets ← 何隆
+├── ClubActivityPublishPage.ets ← 何隆
+```
