@@ -15,15 +15,26 @@
 ### 后端
 ```bash
 # 1. 导入数据库（MySQL 需要先装好）
-mysql -u root < campusdb2.sql
+mysql -u root --default-character-set=utf8mb4 < campusdb2.sql
 
-# 2. 启动 Spring Boot
+# 2. 改数据库密码（如果你的 MySQL 有密码）
+#    打开 Campus-Server/src/main/resources/application.yml
+#    修改 spring.datasource.password: 你的密码
+
+# 3. 启动 Spring Boot
 cd Campus-Server
 mvn spring-boot:run
 ```
 
 ### 鸿蒙端
 用 DevEco Studio 打开 `CampusAssistant/`
+
+**⚠️ 必须改 API 地址：** 打开 `entry/src/main/ets/service/ApiService.ets`，把 `baseUrl` 改成运行后端电脑的局域网 IP，例如：
+```
+static baseUrl: string = 'http://192.168.x.x:8080'
+```
+（手机和电脑必须同一网络，电脑 IP 用 `ifconfig` 或 `ipconfig` 查看）
+
 - API 调用见 `04-api-template.md`
 - 接口定义见 `02-api-doc.md`
 - 表结构见 `01-database.md`
