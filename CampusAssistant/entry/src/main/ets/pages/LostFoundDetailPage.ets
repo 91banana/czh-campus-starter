@@ -3,7 +3,7 @@
 struct LostFoundDetailPage {
   build() {
     Column() {
-      Text('失物详情 - 待实现')
+      Text('LostFoundDetailPage')
         .fontSize(20)
     }
     .width('100%')

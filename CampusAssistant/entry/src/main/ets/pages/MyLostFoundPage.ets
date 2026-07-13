@@ -3,7 +3,7 @@
 struct MyLostFoundPage {
   build() {
     Column() {
-      Text('我的失物 - 待实现')
+      Text('MyLostFoundPage')
         .fontSize(20)
     }
     .width('100%')

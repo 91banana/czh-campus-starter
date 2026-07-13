@@ -3,7 +3,7 @@
 struct LostFoundPublishPage {
   build() {
     Column() {
-      Text('发布失物 - 待实现')
+      Text('LostFoundPublishPage')
         .fontSize(20)
     }
     .width('100%')

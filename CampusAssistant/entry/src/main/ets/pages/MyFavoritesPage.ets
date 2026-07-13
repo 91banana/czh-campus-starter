@@ -3,7 +3,7 @@
 struct MyFavoritesPage {
   build() {
     Column() {
-      Text('我的收藏 - 待实现')
+      Text('MyFavoritesPage')
         .fontSize(20)
     }
     .width('100%')

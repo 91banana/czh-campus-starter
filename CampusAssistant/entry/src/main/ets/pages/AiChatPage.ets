@@ -3,7 +3,7 @@
 struct AiChatPage {
   build() {
     Column() {
-      Text('AI对话 - 待实现')
+      Text('AiChatPage')
         .fontSize(20)
     }
     .width('100%')

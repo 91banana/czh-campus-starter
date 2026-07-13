@@ -3,7 +3,7 @@
 struct ProductDetailPage {
   build() {
     Column() {
-      Text('商品详情 - 待实现')
+      Text('ProductDetailPage')
         .fontSize(20)
     }
     .width('100%')

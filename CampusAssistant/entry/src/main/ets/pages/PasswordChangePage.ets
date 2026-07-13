@@ -3,7 +3,7 @@
 struct PasswordChangePage {
   build() {
     Column() {
-      Text('修改密码 - 待实现')
+      Text('PasswordChangePage')
         .fontSize(20)
     }
     .width('100%')

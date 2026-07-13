@@ -3,7 +3,7 @@
 struct EmptyRoomPage {
   build() {
     Column() {
-      Text('空教室 - 待实现')
+      Text('EmptyRoomPage')
         .fontSize(20)
     }
     .width('100%')

@@ -3,7 +3,7 @@
 struct MyHistoryPage {
   build() {
     Column() {
-      Text('浏览历史 - 待实现')
+      Text('MyHistoryPage')
         .fontSize(20)
     }
     .width('100%')
