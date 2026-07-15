@@ -51,6 +51,14 @@
         </n-card>
       </n-gi>
     </n-grid>
+
+    <n-grid :cols="1" :x-gap="16" :y-gap="16" style="margin-top: 16px">
+      <n-gi>
+        <n-card title="籍贯分布热力图">
+          <div ref="mapChartRef" style="height: 500px"></div>
+        </n-card>
+      </n-gi>
+    </n-grid>
   </div>
 </template>
 
@@ -59,6 +67,9 @@ import { ref, onMounted, nextTick } from 'vue'
 import { NGrid, NGi, NCard, NStatistic } from 'naive-ui'
 import * as echarts from 'echarts'
 import { useUserStore } from '../../stores/user'
+import chinaJson from '../../assets/china.json'
+
+echarts.registerMap('china', chinaJson as any)
 
 const userStore = useUserStore()
 
@@ -72,6 +83,7 @@ const overview = ref<Record<string, number>>({
 const categoryChartRef = ref<HTMLElement | null>(null)
 const statusChartRef = ref<HTMLElement | null>(null)
 const collegeChartRef = ref<HTMLElement | null>(null)
+const mapChartRef = ref<HTMLElement | null>(null)
 
 async function fetchStats(path: string) {
   const res = await fetch(`/api/admin/stats${path}`, {
@@ -131,6 +143,47 @@ onMounted(async () => {
         type: 'bar',
         data: collegeData.map((d: any) => d.value),
         itemStyle: { color: '#4A90D9' },
+      }],
+    })
+  }
+
+  const hometownData = await fetchStats('/hometown-stats')
+  if (mapChartRef.value && hometownData) {
+    const nameFix: Record<string, string> = {
+      '北京': '北京市', '天津': '天津市', '上海': '上海市', '重庆': '重庆市',
+      '河北': '河北省', '山西': '山西省', '辽宁': '辽宁省', '吉林': '吉林省', '黑龙江': '黑龙江省',
+      '江苏': '江苏省', '浙江': '浙江省', '安徽': '安徽省', '福建': '福建省', '江西': '江西省', '山东': '山东省',
+      '河南': '河南省', '湖北': '湖北省', '湖南': '湖南省', '广东': '广东省', '海南': '海南省',
+      '四川': '四川省', '贵州': '贵州省', '云南': '云南省', '陕西': '陕西省',
+      '甘肃': '甘肃省', '青海': '青海省', '台湾': '台湾省',
+    }
+    const mapData = hometownData.map((d: any) => ({
+      name: nameFix[d.name] || d.name,
+      value: d.value,
+    }))
+    const chart = echarts.init(mapChartRef.value)
+    chart.setOption({
+      tooltip: {
+        trigger: 'item',
+        formatter: '{b}: {c}人',
+      },
+      visualMap: {
+        min: 0,
+        max: Math.max(...mapData.map((d: any) => d.value as number), 1),
+        text: ['多', '少'],
+        inRange: { color: ['#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695'] },
+        calculable: true,
+        left: 'left',
+      },
+      series: [{
+        type: 'map',
+        map: 'china',
+        roam: true,
+        label: { show: true, fontSize: 9 },
+        data: mapData,
+        emphasis: {
+          label: { show: true, fontSize: 12 },
+        },
       }],
     })
   }
